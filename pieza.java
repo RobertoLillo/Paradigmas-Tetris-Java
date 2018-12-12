@@ -1,32 +1,40 @@
 public class pieza {
     // Atributos estaticos:
+
     // Variables piezaXY, donde X = IDPieza e Y = Rotaciones.
-    // Estructura pieza: [IDPieza, Rotaciones, X0, Y0, X1, Y1, X2, Y2, X3, Y3].
-    private int pieza10[] = {1, 0, 0, 0, 0, 1, 1, 0, 1, 1};
+    // Estructura pieza: [X0, Y0, X1, Y1, X2, Y2, X3, Y3].
+    // Piezas iniciales sin ningún giro:
+    //   1) 11   2) 2   3)  3   4) 4    5)  5    6) 6    7)  7
+    //      11      2      33      44      555      6        7
+    //              2      3        4               66      77
+    //              2                          
 
-    private int pieza20[] = {2, 0, 0, 0, 0, 1, 1, 0, 2, 0};
-    private int pieza21[] = {2, 1, 0, 0, 0, 1, 0, 2, 1, 2};
-    private int pieza22[] = {2, 2, 0, 1, 1, 1, 2, 0, 2, 1};
-    private int pieza23[] = {2, 3, 0, 0, 1, 0, 1, 1, 1, 2};
+    private int[] pieza10 = {0, 0, 0, 1, 1, 0, 1, 1};
 
-    private int pieza30[] = {3, 0, 0, 0, 0, 1, 0, 2, 1, 1};
-    private int pieza31[] = {3, 1, 0, 1, 1, 0, 1, 1, 2, 1};
-    private int pieza32[] = {3, 2, 0, 1, 1, 0, 1, 1, 1, 2};
-    private int pieza33[] = {3, 3, 0, 0, 1, 0, 1, 1, 2, 0};
+    private int[] pieza20 = {0, 0, 1, 0, 2, 0, 3, 0};
+    private int[] pieza21 = {0, 0, 0, 1, 0, 2, 0, 3};
 
-    private int pieza40[] = {4, 0, 0, 0, 0, 1, 1, 1, 1, 2};
-    private int pieza41[] = {4, 1, 0, 1, 1, 0, 1, 1, 2, 0};
+    private int[] pieza30 = {0, 1, 0, 2, 1, 0, 1, 1};
+    private int[] pieza31 = {0, 0, 1, 0, 1, 1, 2, 1};
 
-    private int pieza50[] = {5, 0, 0, 0, 1, 0, 2, 0, 3, 0};
-    private int pieza51[] = {5, 1, 0, 0, 0, 1, 0, 2, 0, 3};
+    private int[] pieza40 = {0, 0, 0, 1, 1, 1, 1, 2};
+    private int[] pieza41 = {0, 1, 1, 0, 1, 1, 2, 0};
 
-    private int pieza60[] = {6, 0, 0, 0, 0, 1, 1, 1, 2, 1};
-    private int pieza61[] = {6, 1, 0, 2, 1, 0, 1, 1, 1, 2};
-    private int pieza62[] = {6, 2, 0, 0, 1, 0, 2, 0, 2, 1};
-    private int pieza63[] = {6, 3, 0, 0, 0, 1, 0, 2, 1, 0};
+    private int[] pieza50 = {0, 0, 0, 1, 0, 2, 1, 1};
+    private int[] pieza51 = {0, 1, 1, 0, 1, 1, 2, 1};
+    private int[] pieza52 = {0, 1, 1, 0, 1, 1, 1, 2};
+    private int[] pieza53 = {0, 0, 1, 0, 1, 1, 2, 0};
+
+    private int[] pieza60 = {0, 0, 0, 1, 1, 0, 2, 0};
+    private int[] pieza61 = {0, 0, 0, 1, 0, 2, 1, 2};
+    private int[] pieza62 = {0, 1, 1, 1, 2, 0, 2, 1};
+    private int[] pieza63 = {0, 0, 1, 0, 1, 1, 1, 2};
+
+    private int[] pieza70 = {0, 0, 0, 1, 1, 1, 2, 1};
+    private int[] pieza71 = {0, 2, 1, 0, 1, 1, 1, 2};
+    private int[] pieza72 = {0, 0, 1, 0, 2, 0, 2, 1};
+    private int[] pieza73 = {0, 0, 0, 1, 0, 2, 1, 0};
     
-    private int pieza70[] = {7, 0, 0, 1, 0, 2, 1, 0, 1, 1};
-    private int pieza71[] = {7, 1, 0, 0, 1, 0, 1, 1, 2, 1};
 
 
     // Atributos instanciables:
@@ -73,6 +81,7 @@ public class pieza {
         switch(idPieza) {
             case 1:
                 break;
+
             case 2:
                 switch(rotaciones) {
                     case 0:
@@ -80,19 +89,12 @@ public class pieza {
                         rotaciones = 1;
                         break;
                     case 1:
-                        piezaActual = pieza22;
-                        rotaciones = 2;
-                        break;
-                    case 2:
-                        piezaActual = pieza23;
-                        rotaciones = 3;
-                        break;
-                    case 3:
                         piezaActual = pieza20;
                         rotaciones = 0;
                         break;
                 }
                 break;
+
             case 3:
                 switch(rotaciones) {
                     case 0:
@@ -100,19 +102,12 @@ public class pieza {
                         rotaciones = 1;
                         break;
                     case 1:
-                        piezaActual = pieza32;
-                        rotaciones = 2;
-                        break;
-                    case 2:
-                        piezaActual = pieza33;
-                        rotaciones = 3;
-                        break;
-                    case 3:
                         piezaActual = pieza30;
                         rotaciones = 0;
                         break;
                 }
                 break;
+
             case 4:
                 switch(rotaciones) {
                     case 0:
@@ -125,6 +120,7 @@ public class pieza {
                         break;
                 }
                 break;
+
             case 5:
                 switch(rotaciones) {
                     case 0:
@@ -132,11 +128,20 @@ public class pieza {
                         rotaciones = 1;
                         break;
                     case 1:
+                        piezaActual = pieza52;
+                        rotaciones = 2;
+                        break;
+                    case 2:
+                        piezaActual = pieza53;
+                        rotaciones = 3;
+                        break;
+                    case 3:
                         piezaActual = pieza50;
                         rotaciones = 0;
                         break;
                 }
                 break;
+
             case 6:
                 switch(rotaciones) {
                     case 0:
@@ -157,6 +162,7 @@ public class pieza {
                         break;
                 }
                 break;
+
             case 7:
                 switch(rotaciones) {
                     case 0:
@@ -164,17 +170,26 @@ public class pieza {
                         rotaciones = 1;
                         break;
                     case 1:
+                        piezaActual = pieza72;
+                        rotaciones = 0;
+                        break;
+                    case 2:
+                        piezaActual = pieza73;
+                        rotaciones = 3;
+                        break;
+                    case 3:
                         piezaActual = pieza70;
                         rotaciones = 0;
                         break;
                 }
-                break;
+                break;  
+            // Sin default porque son casos limitados a esos numeros      
         }
-    }
+    }   
 
     public void imprimirPieza() {
         int i;
-        for (i = 0; i < 9; i++) {
+        for (i = 0; i < 7; i++) {
             System.out.printf("%d, ", piezaActual[i]);
         }
         System.out.println(piezaActual[i]);
