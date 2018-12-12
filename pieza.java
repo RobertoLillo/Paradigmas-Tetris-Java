@@ -4,10 +4,10 @@ public class pieza {
     // Variables piezaXY, donde X = IDPieza e Y = Rotaciones.
     // Estructura pieza: [X0, Y0, X1, Y1, X2, Y2, X3, Y3].
     // Piezas iniciales sin ningún giro:
-    //   1) 11   2) 2   3)  3   4) 4    5)  5    6) 6    7)  7
-    //      11      2      33      44      555      6        7
-    //              2      3        4               66      77
-    //              2                          
+    //   1) 11   2) 1   3)  1   4) 1    5)  1    6) 1    7)  1
+    //      11      1      11      11      111      1        1
+    //              1      1        1               11      11
+    //              1                          
 
     private int[] pieza10 = {0, 0, 0, 1, 1, 0, 1, 1};
 
@@ -39,7 +39,7 @@ public class pieza {
 
     // Atributos instanciables:
     public int idPieza, rotaciones;
-    public int[] piezaActual;
+    private int[] piezaActual;
 
     // Constructor:
     public pieza(int id) {
@@ -72,11 +72,34 @@ public class pieza {
     }
 
     // Metodos:
-    // Getters:
+    public int[] getPosicion(int i) {
+        int[] posicionXY = new int[2];
+        switch(i) {
+            case 1:
+                posicionXY[0] = piezaActual[0];
+                posicionXY[1] = piezaActual[1];
+                break;
 
-    // Setters:
+            case 2:
+                posicionXY[0] = piezaActual[2];
+                posicionXY[1] = piezaActual[3];
+                break;
 
-    // Otros:
+            case 3:
+                posicionXY[0] = piezaActual[4];
+                posicionXY[1] = piezaActual[5];
+                break;
+                
+            case 4:
+                posicionXY[0] = piezaActual[6];
+                posicionXY[1] = piezaActual[7];
+                break;
+
+            // Sin default porque solo entran los valores listados.
+        }
+        return posicionXY;
+    }
+
     public void rotarPieza() {
         switch(idPieza) {
             case 1:
@@ -183,7 +206,8 @@ public class pieza {
                         break;
                 }
                 break;  
-            // Sin default porque son casos limitados a esos numeros      
+
+            // Sin default porque son casos limitados a esos numeros.    
         }
     }   
 
