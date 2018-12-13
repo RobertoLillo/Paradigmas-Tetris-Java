@@ -24,21 +24,6 @@ class tetris {
                 System.out.println("Salir");
             }
         }
-        /*
-        ArrayList<pieza> listaPiezas = new ArrayList<pieza>();
-        int i;
-        Random rand = new Random();
-        rand.setSeed(123);
-        for (i = 0; i < 3; i++) {
-            pieza piezaNueva = new pieza(1 + rand.nextInt(7));
-            listaPiezas.add(piezaNueva);
-        }
-        for (i = 0; i < 3; i++) {
-            System.out.print(listaPiezas.get(i).idPieza);
-            System.out.print("-");
-            System.out.println(listaPiezas.get(i).rotaciones);
-        }
-        */
 
         tablero tableroMuestra = new tablero(5,10,4,2018);
         tableroMuestra.imprimirTablero();

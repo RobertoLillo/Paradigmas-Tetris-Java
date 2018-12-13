@@ -2,43 +2,43 @@ public class pieza {
     // Atributos estaticos:
 
     // Variables piezaXY, donde X = IDPieza e Y = Rotaciones.
-    // Estructura pieza: [X0, Y0, X1, Y1, X2, Y2, X3, Y3].
+    // Estructura pieza: [X0, Y0, X1, Y1, X2, Y2, X3, Y3, anchoPieza, altoPieza].
     // Piezas iniciales sin ningún giro:
     //   1) 11   2) 1   3)  1   4) 1    5)  1    6) 1    7)  1
     //      11      1      11      11      111      1        1
     //              1      1        1               11      11
     //              1                          
 
-    private int[] pieza10 = {0, 0, 0, 1, 1, 0, 1, 1};
+    private int[] pieza10 = {0, 0, 0, 1, 1, 0, 1, 1, 2, 2};
 
-    private int[] pieza20 = {0, 0, 1, 0, 2, 0, 3, 0};
-    private int[] pieza21 = {0, 0, 0, 1, 0, 2, 0, 3};
+    private int[] pieza20 = {0, 0, 1, 0, 2, 0, 3, 0, 1, 4};
+    private int[] pieza21 = {0, 0, 0, 1, 0, 2, 0, 3, 4, 1};
 
-    private int[] pieza30 = {0, 1, 0, 2, 1, 0, 1, 1};
-    private int[] pieza31 = {0, 0, 1, 0, 1, 1, 2, 1};
+    private int[] pieza30 = {0, 1, 0, 2, 1, 0, 1, 1, 2, 3};
+    private int[] pieza31 = {0, 0, 1, 0, 1, 1, 2, 1, 3, 2};
 
-    private int[] pieza40 = {0, 0, 0, 1, 1, 1, 1, 2};
-    private int[] pieza41 = {0, 1, 1, 0, 1, 1, 2, 0};
+    private int[] pieza40 = {0, 0, 0, 1, 1, 1, 1, 2, 2, 3};
+    private int[] pieza41 = {0, 1, 1, 0, 1, 1, 2, 0, 3, 2};
 
-    private int[] pieza50 = {0, 0, 0, 1, 0, 2, 1, 1};
-    private int[] pieza51 = {0, 1, 1, 0, 1, 1, 2, 1};
-    private int[] pieza52 = {0, 1, 1, 0, 1, 1, 1, 2};
-    private int[] pieza53 = {0, 0, 1, 0, 1, 1, 2, 0};
+    private int[] pieza50 = {0, 0, 0, 1, 0, 2, 1, 1, 3, 2};
+    private int[] pieza51 = {0, 1, 1, 0, 1, 1, 2, 1, 2, 3};
+    private int[] pieza52 = {0, 1, 1, 0, 1, 1, 1, 2, 3, 2};
+    private int[] pieza53 = {0, 0, 1, 0, 1, 1, 2, 0, 2, 3};
 
-    private int[] pieza60 = {0, 0, 0, 1, 1, 0, 2, 0};
-    private int[] pieza61 = {0, 0, 0, 1, 0, 2, 1, 2};
-    private int[] pieza62 = {0, 1, 1, 1, 2, 0, 2, 1};
-    private int[] pieza63 = {0, 0, 1, 0, 1, 1, 1, 2};
+    private int[] pieza60 = {0, 0, 0, 1, 1, 0, 2, 0, 2, 3};
+    private int[] pieza61 = {0, 0, 0, 1, 0, 2, 1, 2, 3, 2};
+    private int[] pieza62 = {0, 1, 1, 1, 2, 0, 2, 1, 2, 3};
+    private int[] pieza63 = {0, 0, 1, 0, 1, 1, 1, 2, 3, 2};
 
-    private int[] pieza70 = {0, 0, 0, 1, 1, 1, 2, 1};
-    private int[] pieza71 = {0, 2, 1, 0, 1, 1, 1, 2};
-    private int[] pieza72 = {0, 0, 1, 0, 2, 0, 2, 1};
-    private int[] pieza73 = {0, 0, 0, 1, 0, 2, 1, 0};
+    private int[] pieza70 = {0, 0, 0, 1, 1, 1, 2, 1, 2, 3};
+    private int[] pieza71 = {0, 2, 1, 0, 1, 1, 1, 2, 3, 2};
+    private int[] pieza72 = {0, 0, 1, 0, 2, 0, 2, 1, 2, 3};
+    private int[] pieza73 = {0, 0, 0, 1, 0, 2, 1, 0, 3, 2};
     
 
 
     // Atributos instanciables:
-    public int idPieza, rotaciones;
+    private int idPieza, rotaciones;
     private int[] piezaActual;
 
     // Constructor:
@@ -70,6 +70,26 @@ public class pieza {
             // Sin default porque al constructor solo entran valores entre 1 y 7 para id.
         }
     }
+
+    // Getters:
+    public int getIdPieza() {
+        return idPieza;
+    }
+
+    public int getRotaciones() {
+        return rotaciones;
+    }
+
+    public int getAnchoPieza() {
+        return piezaActual[8];
+    }
+
+    public int getAltoPieza() {
+        return piezaActual[9];
+    }
+
+    // Setters:
+
 
     // Metodos:
     public int[] getPosicion(int i) {

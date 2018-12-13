@@ -8,7 +8,6 @@ class tablero {
     public int ancho, alto, cantidadDePiezas, puntaje;
     private ArrayList<int[]> tableroActual = new ArrayList<int[]>();
     private ArrayList<pieza> listaPiezas = new ArrayList<pieza>();
-    private int[] filaCompleta;
 
     // Constructor:
     // Este constructor corresponde a la funcionalidad createBoard().
@@ -28,30 +27,28 @@ class tablero {
             }
             tableroActual.add(fila);
         }
-        
-        int[] filaAuxiliar = new int[ancho];
-        for (i = 0; i < ancho; i++) {
-            filaAuxiliar[i] = 1;
-        }
-        filaCompleta = filaAuxiliar;
 
         // Insercion de piezas al tablero.
-        int numeroIdPieza, numeroPosicion, contador;
+        int numeroIdPieza, numeroAnchoPieza, numeroAltoPieza, numeroPosicion, contador;
         int[] copiaFila;
         boolean flag;
         Random numeroRandom = new Random();
         numeroRandom.setSeed(seedEntrada);
+
         for (i = 0; i < cantidadDePiezas; i++) {
             numeroIdPieza = 1 + numeroRandom.nextInt(7);
             numeroPosicion = numeroRandom.nextInt(ancho);
             pieza piezaActual = new pieza(numeroIdPieza);
+            numeroAnchopieza = piezaActual.getAnchoPieza();
+            numeroAltoPieza = piezaActual.getAltoPieza();
 
             flag = true;
             contador = alto - 1;
             while (flag && contador >= 0) {
                 copiaFila = tableroActual.get(contador);
                 if (copiaFila[numeroPosicion] == 1) {
-                    copiaFila = tableroActual.get(contador + 1);
+                    contador++;
+                    copiaFila = tableroActual.get(contador);
                     flag = false;
                 }
                 else {
