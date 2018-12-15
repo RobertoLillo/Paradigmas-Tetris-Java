@@ -15,18 +15,41 @@ class tetris {
         if (scanner.hasNextInt()) {
             opcion = scanner.nextInt();
             if (opcion == 1) {
-                System.out.println("Jugar");
+                System.out.println("Jugar\n");
             }
             else if (opcion == 2) {
-                System.out.println("Cuenta jugador");
+                System.out.println("Cuenta jugador\n");
             }
             else if (opcion == 3) {
-                System.out.println("Salir");
+                System.out.println("Salir\n");
             }
         }
 
-        tablero tableroMuestra = new tablero(5,10,4,2018);
-        tableroMuestra.imprimirTablero();
+        System.out.println("1 para crear tablero");
+        if (scanner.hasNextInt()) {
+            opcion = scanner.nextInt();
+            if (opcion == 1) {
+                tablero tableroJugar = new tablero(5, 10);
+                tableroJugar.imprimirTablero();
+                pieza p1 = new pieza(1);
+                tableroJugar.play(p1, 0);
+                System.out.println();
+                tableroJugar.imprimirTablero();
+            }
+        }
+        /*
+        // Verificacion de que la pieza puede quedar colocada dentro del ancho maximo
+        // del tablero.
+        flag1 = true;
+        while (flag1) {
+            if (posicionEntrada + anchoPieza > ancho) {
+                posicionEntrada = numeroRandom.nextInt(ancho);
+            } else {
+                flag1 = false;
+            }
+        }
+        */
+
         scanner.close();
     }
 }

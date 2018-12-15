@@ -87,11 +87,6 @@ public class pieza {
     public int getAltoPieza() {
         return piezaActual[9];
     }
-
-    // Setters:
-
-
-    // Metodos:
     public int[] getPosicion(int i) {
         int[] posicionXY = new int[2];
         switch(i) {
@@ -120,6 +115,10 @@ public class pieza {
         return posicionXY;
     }
 
+    // Setters:
+
+
+    // Metodos:
     public void rotarPieza() {
         switch(idPieza) {
             case 1:
