@@ -28,6 +28,9 @@ class tablero {
     }
 
     // Getters:
+    public int getAncho() {
+        return ancho;
+    }
     public int getCantidadDePiezas() {
         return cantidadDePiezas;
     }
@@ -81,7 +84,6 @@ class tablero {
         }
 
         // Verificacion de que la pieza puede colocarse en la cantidad de alto disponible.
-        System.out.printf("Alto disponible: %d\n", altoDisponible);
         if (altoDisponible == 0) {
             return 0; // Game Over
         }
@@ -269,14 +271,32 @@ class tablero {
 
     public void imprimirTablero() {
         int i, j;
+        String stringTablero = "\t\n";
         int[] auxiliar = new int[ancho];
+        // Tapa superior del tablero.
+        for (i = 0; i < ancho + 2; i++) {
+            stringTablero += "-";
+        }
+        // Parte interior del tablero.
+        stringTablero += "\n\t";
         for (i = alto - 1; i >= 0; i--) {
             auxiliar = tableroActual.get(i);
+            stringTablero += "|";
             for (j = 0; j < ancho; j++) {
-                System.out.print(auxiliar[j]);
-                System.out.print(" ");
+                if (auxiliar[j] == 0) {
+                    stringTablero += " ";
+                }
+                else if (auxiliar[j] == 1) {
+                    stringTablero += "#";
+                }
             }
-            System.out.println();
+            stringTablero += "|\n\t";
         }
+        // Tapa inferior del tablero.
+        for (i = 0; i < ancho + 2; i++) {
+            stringTablero += "-";
+        }
+        stringTablero += "\n";
+        System.out.println(stringTablero);
     }
 }

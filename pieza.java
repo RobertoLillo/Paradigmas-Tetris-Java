@@ -231,10 +231,83 @@ public class pieza {
     }   
 
     public void imprimirPieza() {
-        int i;
-        for (i = 0; i < 7; i++) {
-            System.out.printf("%d, ", piezaActual[i]);
+        switch (idPieza) {
+            case 1:
+                System.out.println("\t##\n\t##");
+                break;
+            
+            case 2:
+                if (rotaciones == 0) {
+                    System.out.println("\t#\n\t#\n\t#\n\t#");
+                }
+                else if (rotaciones == 1) {
+                    System.out.println("\t####");
+                }
+                break;
+
+            case 3:
+                if (rotaciones == 0) {
+                    System.out.println("\t #\n\t##\n\t#");
+                }
+                else if (rotaciones == 1) {
+                    System.out.println("\t##\n\t ##");
+                }
+                break;
+
+            case 4:
+                if (rotaciones == 0) {
+                    System.out.println("\t# \n\t##\n\t #");
+                }
+                else if (rotaciones == 1) {
+                    System.out.println("\t ##\n\t##");
+                }
+                break;
+
+            case 5:
+                if (rotaciones == 0) {
+                    System.out.println("\t # \n\t###");
+                }
+                else if (rotaciones == 1) {
+                    System.out.println("\t# \n\t##\n\t#");
+                }
+                else if (rotaciones == 2) {
+                    System.out.println("\t####\n\t #");
+                }
+                else if (rotaciones == 3) {
+                    System.out.println("\t #\n\t##\n\t #");
+                }
+                break;
+
+            case 6:
+                if (rotaciones == 0) {
+                    System.out.println("\t#\n\t#\n\t##");
+                }
+                else if (rotaciones == 1) {
+                    System.out.println("\t###\n\t#");
+                }
+                else if (rotaciones == 2) {
+                    System.out.println("\t##\n\t#\n\t#");
+                }
+                else if (rotaciones == 3) {
+                    System.out.println("\t  #\n\t###");
+                }
+                break;
+            
+            case 7:
+                if (rotaciones == 0) {
+                    System.out.println("\t #\n\t #\n\t##");
+                }
+                else if (rotaciones == 1) {
+                    System.out.println("\t#\n\t###");
+                }
+                else if (rotaciones == 2) {
+                    System.out.println("\t##\n\t#\n\t#");
+                }
+                else if (rotaciones == 3) {
+                    System.out.println("\t###\n\t  #");
+                }
+                break;
+            
         }
-        System.out.println(piezaActual[i]);
     }
 }
