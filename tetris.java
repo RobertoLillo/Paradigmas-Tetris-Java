@@ -5,18 +5,17 @@ import java.util.ArrayList;
 class tetris {
     public static void main(String args[]) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\n\t-----------------------");
-        System.out.println("\t| Bienvenido a Tetris |");
-        System.out.println("\t-----------------------\n");
+        System.out.println("\n\t\t-----------------------");
+        System.out.println("\t\t| Bienvenido a Tetris |");
+        System.out.println("\t\t-----------------------\n");
 
-        System.out.print("Ingrese la opcion que desea: ");
-
+        System.out.print("     * Ingrese una de las siguientes opciones * \n\t 1) Jugar \n\t 2) Crear perfil de jugador \n\t 3) Salir del juego\n\n");
+        System.out.print("Opcion -> ");
         int opcion;
         if (scanner.hasNextInt()) {
             opcion = scanner.nextInt();
             if (opcion == 1) {
                 System.out.println("Jugar\n");
-
 
                 // Se piden todos los datos de entrda. y se crea el tablero inicial vacio.
                 int anchoEntrada, altoEntrada, cantidadDePiezas, seedEntrada;
@@ -49,9 +48,6 @@ class tetris {
                             sigPieza.rotarPieza();
                             cantGiros--;
                         }
-                        
-                        System.out.println("Piezas colocadas:");
-                        sigPieza.imprimirPieza();
 
                         verificador = tableroJugar.play(sigPieza, posicion);
                         if (verificador == 2) {
@@ -60,26 +56,36 @@ class tetris {
                     }
                     tableroJugar.imprimirTablero();
                 }
-                /*
+                
                 int posicionEntrada;
                 boolean verificadorDeJuego;
                 verificadorDeJuego = true;
                 while (verificadorDeJuego) {
                     // Se genera la siguiente pieza aleatoria.
+                    idPieza = 1 + numeroRand.nextInt(7);
+                    sigPieza = new pieza(idPieza);
+                    System.out.println("Siguiente pieza: ");
+                    sigPieza.imprimirPieza();
 
                     // Se pide la posicion donde colocar la pieza.
-                    System.out.print("Ingrese la posicion de la pieza: ");
+                    System.out.print("Ingrese la posicion en la que colocar la pieza: ");
                     posicionEntrada = scanner.nextInt();
 
                     // Se hace el proceso de intentar colocar la pieza.
-                    verificador = tableroJugar.play(p1, posicionEntrada - 1);
+                    verificador = tableroJugar.play(sigPieza, posicionEntrada - 1);
 
-                    System.out.printf("Verificador: %d\n", verificador);
-                    tableroJugar.imprimirTablero();
-                    System.out.printf("Puntaje: %d\n", tableroJugar.getPuntaje());
-                    System.out.printf("CantidadP: %d\n\n", tableroJugar.getCantidadDePiezas());
+                    if (verificador == 0) {
+                        System.out.println("*** GAME OVER ***");
+                        verificadorDeJuego = false;
+                    }
+                    else if (verificador ==  1) {
+                        System.out.println("*** NO SE PUEDE COLOCAR LA PIEZA DE ESA FORMA");
+                    }
+                    else if (verificador == 2) {
+                        tableroJugar.imprimirTablero();
+                    }
                 }
-                */
+                
             }
             else if (opcion == 2) {
                 System.out.println("Cuenta jugador\n");

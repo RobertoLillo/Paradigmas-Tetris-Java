@@ -256,7 +256,7 @@ public class pieza {
 
             case 4:
                 if (rotaciones == 0) {
-                    System.out.println("\t# \n\t##\n\t #");
+                    System.out.println("\t#\n\t##\n\t #");
                 }
                 else if (rotaciones == 1) {
                     System.out.println("\t ##\n\t##");
@@ -265,13 +265,13 @@ public class pieza {
 
             case 5:
                 if (rotaciones == 0) {
-                    System.out.println("\t # \n\t###");
+                    System.out.println("\t #\n\t###");
                 }
                 else if (rotaciones == 1) {
-                    System.out.println("\t# \n\t##\n\t#");
+                    System.out.println("\t#\n\t##\n\t#");
                 }
                 else if (rotaciones == 2) {
-                    System.out.println("\t####\n\t #");
+                    System.out.println("\t###\n\t #");
                 }
                 else if (rotaciones == 3) {
                     System.out.println("\t #\n\t##\n\t #");
