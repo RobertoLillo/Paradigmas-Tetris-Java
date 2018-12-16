@@ -14,26 +14,26 @@ public class pieza {
     private int[] pieza20 = {0, 0, 1, 0, 2, 0, 3, 0, 1, 4};
     private int[] pieza21 = {0, 0, 0, 1, 0, 2, 0, 3, 4, 1};
 
-    private int[] pieza30 = {0, 1, 0, 2, 1, 0, 1, 1, 2, 3};
-    private int[] pieza31 = {0, 0, 1, 0, 1, 1, 2, 1, 3, 2};
+    private int[] pieza30 = {0, 0, 1, 0, 1, 1, 2, 1, 2, 3};
+    private int[] pieza31 = {0, 1, 0, 2, 1, 0, 1, 1, 3, 2};
 
-    private int[] pieza40 = {0, 0, 0, 1, 1, 1, 1, 2, 2, 3};
-    private int[] pieza41 = {0, 1, 1, 0, 1, 1, 2, 0, 3, 2};
+    private int[] pieza40 = {0, 1, 1, 0, 1, 1, 2, 0, 2, 3};
+    private int[] pieza41 = {0, 0, 0, 1, 1, 1, 1, 2, 3, 2};
 
     private int[] pieza50 = {0, 0, 0, 1, 0, 2, 1, 1, 3, 2};
-    private int[] pieza51 = {0, 1, 1, 0, 1, 1, 2, 1, 2, 3};
+    private int[] pieza51 = {0, 0, 1, 0, 1, 1, 2, 0, 2, 3};
     private int[] pieza52 = {0, 1, 1, 0, 1, 1, 1, 2, 3, 2};
-    private int[] pieza53 = {0, 0, 1, 0, 1, 1, 2, 0, 2, 3};
+    private int[] pieza53 = {0, 1, 1, 0, 1, 1, 2, 1, 2, 3};
 
     private int[] pieza60 = {0, 0, 0, 1, 1, 0, 2, 0, 2, 3};
-    private int[] pieza61 = {0, 0, 0, 1, 0, 2, 1, 2, 3, 2};
+    private int[] pieza61 = {0, 0, 1, 0, 1, 1, 1, 2, 3, 2};
     private int[] pieza62 = {0, 1, 1, 1, 2, 0, 2, 1, 2, 3};
-    private int[] pieza63 = {0, 0, 1, 0, 1, 1, 1, 2, 3, 2};
+    private int[] pieza63 = {0, 0, 0, 1, 0, 2, 1, 2, 3, 2};
 
     private int[] pieza70 = {0, 0, 0, 1, 1, 1, 2, 1, 2, 3};
-    private int[] pieza71 = {0, 2, 1, 0, 1, 1, 1, 2, 3, 2};
+    private int[] pieza71 = {0, 0, 0, 1, 0, 2, 1, 0, 3, 2};
     private int[] pieza72 = {0, 0, 1, 0, 2, 0, 2, 1, 2, 3};
-    private int[] pieza73 = {0, 0, 0, 1, 0, 2, 1, 0, 3, 2};
+    private int[] pieza73 = {0, 2, 1, 0, 1, 1, 1, 2, 3, 2};
     
 
 

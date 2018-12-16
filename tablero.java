@@ -27,17 +27,37 @@ class tablero {
         }
     }
 
+    // Getters:
+    public int getCantidadDePiezas() {
+        return cantidadDePiezas;
+    }
+
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+
     // Metodos:
-    public void play(pieza piezaEntrada, int posicionEntrada) {
-        int i, anchoPieza, altoPieza, contador;
+    public int play(pieza piezaEntrada, int posicionEntrada) {
+        int i, anchoPieza, altoDisponible, contador;
         int[] copiaFila;
         boolean flag1, flag2;
         anchoPieza = piezaEntrada.getAnchoPieza();
-        altoPieza = piezaEntrada.getAltoPieza();
+
+        // Verificacion de que la pieza puede quedar colocada dentro del ancho maximo del tablero.
+        flag1 = true;
+        while (flag1) {
+            if (posicionEntrada + anchoPieza > ancho) {
+                return 1; // No se puede colocar en esa posicion.
+            } else {
+                flag1 = false;
+            }
+        }
 
         // Busqueda de que tan abajo se puede colocar la pieza.
         flag1 = true;
         contador = alto - 1;
+        altoDisponible = 0;
         copiaFila = tableroActual.get(contador);
         while (flag1 && contador >= 0) {
             flag2 = true;
@@ -49,153 +69,202 @@ class tablero {
             if (flag2 && contador > 0) {
                 contador--;
                 copiaFila = tableroActual.get(contador);
-            } else {
+                altoDisponible++;
+            }
+            else if (flag2 && contador == 0) {
+                altoDisponible++;
+                flag1 = false;
+            }
+            else {
                 flag1 = false;
             }
         }
 
-        // Dependiendo del tipo de pieza la fila en la que se coloca es distinta.
-        // Pieza 1
-        if (piezaEntrada.getIdPieza() == 1) {
-            if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1) {
-                contador++;
-                copiaFila = tableroActual.get(contador);
-            }
+        // Verificacion de que la pieza puede colocarse en la cantidad de alto disponible.
+        System.out.printf("Alto disponible: %d\n", altoDisponible);
+        if (altoDisponible == 0) {
+            return 0; // Game Over
         }
-        // Pieza 2
-        else if (piezaEntrada.getIdPieza() == 2) {
-            if (piezaEntrada.getRotaciones() == 0) {
-                if (copiaFila[posicionEntrada] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+        else {
+            // Dependiendo del tipo de pieza la colocación es distinta.
+            // Pieza 1
+            if (piezaEntrada.getIdPieza() == 1) {
+                if (altoDisponible >= 2) {
+                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
                 }
-            } else if (piezaEntrada.getRotaciones() == 1) {
-                if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1
-                        || copiaFila[posicionEntrada + 3] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+                else {
+                    return 0; // Game Over
                 }
             }
-        }
-        // Pieza 3
-        else if (piezaEntrada.getIdPieza() == 3) {
-            if (piezaEntrada.getRotaciones() == 0) {
-                if (copiaFila[posicionEntrada] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+            // Pieza 2
+            else if (piezaEntrada.getIdPieza() == 2) {
+                if (piezaEntrada.getRotaciones() == 0 && altoDisponible >= 4) {
+                    if (copiaFila[posicionEntrada] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
                 }
-            } else if (piezaEntrada.getRotaciones() == 1) {
-                if (copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+                else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 1) {
+                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1 || copiaFila[posicionEntrada + 3] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
                 }
-            }
-        }
-        // Pieza 4
-        else if (piezaEntrada.getIdPieza() == 4) {
-            if (piezaEntrada.getRotaciones() == 0) {
-                if (copiaFila[posicionEntrada + 1] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
-                }
-            } else if (piezaEntrada.getRotaciones() == 1) {
-                if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+                else {
+                    return 0; // Game Over
                 }
             }
-        }
-        // Pieza 5
-        else if (piezaEntrada.getIdPieza() == 5) {
-            if (piezaEntrada.getRotaciones() == 0) {
-                if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+            // Pieza 3
+            else if (piezaEntrada.getIdPieza() == 3) {
+                if (piezaEntrada.getRotaciones() == 0 && altoDisponible >= 3) {
+                    if (copiaFila[posicionEntrada] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
                 }
-            } else if (piezaEntrada.getRotaciones() == 1) {
-                if (copiaFila[posicionEntrada] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+                else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 2) {
+                    if (copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
                 }
-            } else if (piezaEntrada.getRotaciones() == 2) {
-                if (copiaFila[posicionEntrada + 1] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
-                }
-            } else if (piezaEntrada.getRotaciones() == 3) {
-                if (copiaFila[posicionEntrada + 1] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+                else {
+                    return 0; // Game Over
                 }
             }
-        }
-        // Pieza 6
-        else if (piezaEntrada.getIdPieza() == 6) {
-            if (piezaEntrada.getRotaciones() == 0) {
-                if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+            // Pieza 4
+            else if (piezaEntrada.getIdPieza() == 4) {
+                if (piezaEntrada.getRotaciones() == 0 && altoDisponible >= 3) {
+                    if (copiaFila[posicionEntrada + 1] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
                 }
-            } else if (piezaEntrada.getRotaciones() == 1) {
-                if (copiaFila[posicionEntrada] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+                else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 2) {
+                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
                 }
-            } else if (piezaEntrada.getRotaciones() == 2) {
-                if (copiaFila[posicionEntrada + 1] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
-                }
-            } else if (piezaEntrada.getRotaciones() == 3) {
-                if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+                else {
+                    return 0; // Game Over
                 }
             }
-        }
-        // Pieza 7
-        else if (piezaEntrada.getIdPieza() == 7) {
-            if (piezaEntrada.getRotaciones() == 0) {
-                if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+            // Pieza 5
+            else if (piezaEntrada.getIdPieza() == 5) {
+                if (piezaEntrada.getRotaciones() == 0 && altoDisponible >= 2) {
+                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
                 }
-            } else if (piezaEntrada.getRotaciones() == 1) {
-                if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+                else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 3) {
+                    if (copiaFila[posicionEntrada] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
                 }
-            } else if (piezaEntrada.getRotaciones() == 2) {
-                if (copiaFila[posicionEntrada] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+                else if (piezaEntrada.getRotaciones() == 2 && altoDisponible >= 2) {
+                    if (copiaFila[posicionEntrada + 1] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
                 }
-            } else if (piezaEntrada.getRotaciones() == 3) {
-                if (copiaFila[posicionEntrada + 2] == 1) {
-                    contador++;
-                    copiaFila = tableroActual.get(contador);
+                else if (piezaEntrada.getRotaciones() == 3 && altoDisponible >= 3) {
+                    if (copiaFila[posicionEntrada + 1] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
+                }
+                else {
+                    return 0; // Game Over
                 }
             }
-        }
+            // Pieza 6
+            else if (piezaEntrada.getIdPieza() == 6) {
+                if (piezaEntrada.getRotaciones() == 0 && altoDisponible >= 3) {
+                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
+                }
+                else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 2) {
+                    if (copiaFila[posicionEntrada] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
+                }
+                else if (piezaEntrada.getRotaciones() == 2 && altoDisponible >= 3) {
+                    if (copiaFila[posicionEntrada + 1] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
+                }
+                else if (piezaEntrada.getRotaciones() == 3 && altoDisponible >= 2) {
+                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
+                }
+                else {
+                    return 0; // Game Over
+                }
+            }
+            // Pieza 7
+            else if (piezaEntrada.getIdPieza() == 7) {
+                if (piezaEntrada.getRotaciones() == 0 && altoDisponible >= 3) {
+                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
+                }
+                else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 2) {
+                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
+                }
+                else if (piezaEntrada.getRotaciones() == 2 && altoDisponible >= 3) {
+                    if (copiaFila[posicionEntrada] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
+                }
+                else if (piezaEntrada.getRotaciones() == 3 && altoDisponible >= 2) {
+                    if (copiaFila[posicionEntrada + 2] == 1) {
+                        contador++;
+                        copiaFila = tableroActual.get(contador);
+                    }
+                }
+                else {
+                    return 0; // Game Over
+                }
+            }
 
-        // Colocar la pieza.
-        int alturaActual;
-        int[] coordenadaBloque;
-        alturaActual = 0;
-        for (i = 1; i <= 4; i++) {
-            coordenadaBloque = piezaEntrada.getPosicion(i);
-            if (coordenadaBloque[0] == alturaActual) {
-                copiaFila[posicionEntrada + coordenadaBloque[1]] = 1;
+            // Colocar la pieza.
+            int alturaActual;
+            int[] coordenadaBloque;
+            alturaActual = 0;
+            for (i = 1; i <= 4; i++) {
+                coordenadaBloque = piezaEntrada.getPosicion(i);
+                if (coordenadaBloque[0] == alturaActual) {
+                    copiaFila[posicionEntrada + coordenadaBloque[1]] = 1;
+                }
+                else if (coordenadaBloque[0] != alturaActual) {
+                    alturaActual++;
+                    tableroActual.set(contador, copiaFila);
+                    contador++;
+                    copiaFila = tableroActual.get(contador);
+                    copiaFila[posicionEntrada + coordenadaBloque[1]] = 1;
+                }
             }
-            else if (coordenadaBloque[0] != alturaActual) {
-                alturaActual++;
-                tableroActual.set(contador, copiaFila);
-                contador++;
-                copiaFila = tableroActual.get(contador);
-                copiaFila[posicionEntrada + coordenadaBloque[1]] = 1;
-            }
+            listaPiezas.add(piezaEntrada);
+            cantidadDePiezas++;
+            return 2; // Se logró colocar la pieza correctamente.
         }
-        listaPiezas.add(piezaEntrada);
     }
 
     public void imprimirTablero() {
