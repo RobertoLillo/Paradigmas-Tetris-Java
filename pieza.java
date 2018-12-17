@@ -213,7 +213,7 @@ public class pieza {
                         break;
                     case 1:
                         piezaActual = pieza72;
-                        rotaciones = 0;
+                        rotaciones = 2;
                         break;
                     case 2:
                         piezaActual = pieza73;
@@ -286,7 +286,7 @@ public class pieza {
                     System.out.println("\t###\n\t#");
                 }
                 else if (rotaciones == 2) {
-                    System.out.println("\t##\n\t#\n\t#");
+                    System.out.println("\t##\n\t #\n\t #");
                 }
                 else if (rotaciones == 3) {
                     System.out.println("\t  #\n\t###");
