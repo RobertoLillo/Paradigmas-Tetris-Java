@@ -1,4 +1,4 @@
-public class pieza {
+public class Pieza {
     // Atributos estaticos:
 
     // Variables piezaXY, donde X = IDPieza e Y = Rotaciones.
@@ -42,7 +42,7 @@ public class pieza {
     private int[] piezaActual;
 
     // Constructor:
-    public pieza(int id) {
+    public Pieza(int id) {
         idPieza = id;
         rotaciones = 0;
         switch(idPieza) {

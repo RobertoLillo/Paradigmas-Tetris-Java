@@ -1,16 +1,16 @@
 import java.util.Random;
 import java.util.ArrayList;
 
-class tablero {
+public class Tablero {
     // Atributos estaticos:
 
     // Atributos instanciables:
     private int ancho, alto, cantidadDePiezas, puntaje;
     private ArrayList<int[]> tableroActual = new ArrayList<int[]>();
-    private ArrayList<pieza> listaPiezas = new ArrayList<pieza>();
+    private ArrayList<Pieza> listaPiezas = new ArrayList<Pieza>();
 
     // Constructor:
-    public tablero(int anchoEntrada, int altoEntrada) {
+    public Tablero(int anchoEntrada, int altoEntrada) {
         // Asignacion de los atributos instanciables y creacion del tablero vacio.
         ancho = anchoEntrada;
         alto = altoEntrada;
@@ -32,6 +32,11 @@ class tablero {
     public int getAncho() {
         return ancho;
     }
+
+    public int getAlto() {
+        return alto;
+    }
+
     public int getCantidadDePiezas() {
         return cantidadDePiezas;
     }
@@ -39,7 +44,6 @@ class tablero {
     public int getPuntaje() {
         return puntaje;
     }
-
 
     // Metodos:
     public void checkBoard() {
@@ -56,6 +60,7 @@ class tablero {
             }
             if (flag) {
                 tableroActual.remove(i);
+                puntaje += 100;
                 nuevaFila = new int[ancho];
                 for (j = 0; j < ancho; j++) {
                     nuevaFila[j] = 0;
@@ -66,8 +71,44 @@ class tablero {
         }
     }
 
+    public void colocarPiezasIniciales(int cantidad, int seedEntrada) {
+        int idPieza, cantGiros, posicion, verificador;
+        boolean flag;
+        Random numeroRand = new Random();
+        numeroRand.setSeed(seedEntrada);
+        Pieza sigPieza;
+        while (cantidad > 0) {
+            idPieza = 1 + numeroRand.nextInt(7);
+            cantGiros = numeroRand.nextInt(4);
+            posicion = numeroRand.nextInt(ancho);
 
-    public int play(pieza piezaEntrada, int posicionEntrada) {
+            sigPieza = new Pieza(idPieza);
+            while (cantGiros > 0) {
+                sigPieza.rotarPieza();
+                cantGiros--;
+            }
+
+            flag = true;
+            while (flag) {
+                // Verificacion de que la pieza puede quedar colocada dentro del ancho maximo
+                // del tablero.
+                // De no ser posible esa colocacion, se asigna una nueva posicion para ubicar la
+                // pieza en el tablero.
+                if (posicion + sigPieza.getAnchoPieza() > ancho) {
+                    posicion = numeroRand.nextInt(ancho);
+                } else {
+                    verificador = play(sigPieza, posicion);
+                    if (verificador == 1) {
+                        checkBoard();
+                        cantidad--;
+                        flag = false;
+                    }
+                }
+            }
+        }
+    }
+
+    public int play(Pieza piezaEntrada, int posicionEntrada) {
         int i, anchoPieza, altoDisponible, contador;
         int[] copiaFila;
         boolean flag1, flag2;
@@ -90,21 +131,19 @@ class tablero {
                 contador--;
                 copiaFila = tableroActual.get(contador);
                 altoDisponible++;
-            }
-            else if (flag2 && contador == 0) {
+            } else if (flag2 && contador == 0) {
                 altoDisponible++;
                 flag1 = false;
-            }
-            else {
+            } else {
                 flag1 = false;
             }
         }
 
-        // Verificacion de que la pieza puede colocarse en la cantidad de alto disponible.
+        // Verificacion de que la pieza puede colocarse en la cantidad de alto
+        // disponible.
         if (altoDisponible == 0) {
             return 0; // Game Over
-        }
-        else {
+        } else {
             // Dependiendo del tipo de pieza la colocación es distinta.
             // Pieza 1
             if (piezaEntrada.getIdPieza() == 1) {
@@ -113,8 +152,7 @@ class tablero {
                         contador++;
                         copiaFila = tableroActual.get(contador);
                     }
-                }
-                else {
+                } else {
                     return 0; // Game Over
                 }
             }
@@ -125,14 +163,13 @@ class tablero {
                         contador++;
                         copiaFila = tableroActual.get(contador);
                     }
-                }
-                else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 1) {
-                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1 || copiaFila[posicionEntrada + 3] == 1) {
+                } else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 1) {
+                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1
+                            || copiaFila[posicionEntrada + 2] == 1 || copiaFila[posicionEntrada + 3] == 1) {
                         contador++;
                         copiaFila = tableroActual.get(contador);
                     }
-                }
-                else {
+                } else {
                     return 0; // Game Over
                 }
             }
@@ -143,24 +180,20 @@ class tablero {
                         if (altoDisponible >= 3) {
                             contador++;
                             copiaFila = tableroActual.get(contador);
-                        }
-                        else {
+                        } else {
                             return 0; // Game Over
                         }
                     }
-                }
-                else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 1) {
+                } else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 1) {
                     if ((copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1)) {
                         if (altoDisponible >= 2) {
                             contador++;
                             copiaFila = tableroActual.get(contador);
-                        }
-                        else {
+                        } else {
                             return 0; // Game Over
                         }
                     }
-                }
-                else {
+                } else {
                     return 0; // Game Over
                 }
             }
@@ -171,69 +204,59 @@ class tablero {
                         if (altoDisponible >= 3) {
                             contador++;
                             copiaFila = tableroActual.get(contador);
-                        }
-                        else {
+                        } else {
                             return 0; // Game Over
                         }
                     }
-                }
-                else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 1) {
+                } else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 1) {
                     if ((copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1)) {
                         if (altoDisponible >= 2) {
                             contador++;
                             copiaFila = tableroActual.get(contador);
-                        }
-                        else {
+                        } else {
                             return 0; // Game Over
                         }
                     }
-                }
-                else {
+                } else {
                     return 0; // Game Over
                 }
             }
             // Pieza 5
             else if (piezaEntrada.getIdPieza() == 5) {
                 if (piezaEntrada.getRotaciones() == 0 && altoDisponible >= 2) {
-                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1) {
+                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1
+                            || copiaFila[posicionEntrada + 2] == 1) {
                         contador++;
                         copiaFila = tableroActual.get(contador);
                     }
-                }
-                else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 2) {
+                } else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 2) {
                     if (copiaFila[posicionEntrada] == 1) {
                         if (altoDisponible >= 3) {
                             contador++;
                             copiaFila = tableroActual.get(contador);
-                        }
-                        else {
+                        } else {
                             return 0; // Game Over
                         }
                     }
-                }
-                else if (piezaEntrada.getRotaciones() == 2 && altoDisponible >= 1) {
-                    if (copiaFila[posicionEntrada + 1] == 1 ) {
+                } else if (piezaEntrada.getRotaciones() == 2 && altoDisponible >= 1) {
+                    if (copiaFila[posicionEntrada + 1] == 1) {
                         if (altoDisponible >= 2) {
                             contador++;
                             copiaFila = tableroActual.get(contador);
-                        }
-                        else {
+                        } else {
                             return 0; // Game Over
                         }
                     }
-                }
-                else if (piezaEntrada.getRotaciones() == 3 && altoDisponible >= 2) {
+                } else if (piezaEntrada.getRotaciones() == 3 && altoDisponible >= 2) {
                     if (copiaFila[posicionEntrada + 1] == 1) {
                         if (altoDisponible >= 3) {
                             contador++;
                             copiaFila = tableroActual.get(contador);
-                        }
-                        else {
+                        } else {
                             return 0; // Game Ober
                         }
                     }
-                }
-                else {
+                } else {
                     return 0; // Game Over
                 }
             }
@@ -244,57 +267,49 @@ class tablero {
                         contador++;
                         copiaFila = tableroActual.get(contador);
                     }
-                }
-                else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 1) {
+                } else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 1) {
                     if (copiaFila[posicionEntrada] == 1) {
                         if (altoDisponible >= 2) {
                             contador++;
                             copiaFila = tableroActual.get(contador);
-                        }
-                        else {
+                        } else {
                             return 0; // Game Over
                         }
                     }
-                }
-                else if (piezaEntrada.getRotaciones() == 2 && altoDisponible >= 2) {
+                } else if (piezaEntrada.getRotaciones() == 2 && altoDisponible >= 2) {
                     if (contador > 0) {
                         int[] copiaFilaAux = tableroActual.get(contador - 1);
                         if (copiaFila[posicionEntrada + 1] == 0 && copiaFilaAux[posicionEntrada + 1] == 0) {
                             contador--;
                             copiaFila = tableroActual.get(contador);
-                        }
-                        else {
+                        } else {
                             if (copiaFila[posicionEntrada + 1] == 1) {
                                 if (altoDisponible >= 3) {
                                     contador++;
                                     copiaFila = tableroActual.get(contador);
-                                }
-                                else {
+                                } else {
                                     return 0; // Game Over
                                 }
                             }
                         }
-                    }
-                    else {
+                    } else {
                         if (copiaFila[posicionEntrada + 1] == 1) {
                             if (altoDisponible >= 3) {
                                 contador++;
                                 copiaFila = tableroActual.get(contador);
-                            }
-                            else {
+                            } else {
                                 return 0; // Game Over
                             }
                         }
                     }
 
-                }
-                else if (piezaEntrada.getRotaciones() == 3 && altoDisponible >= 2) {
-                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1) {
+                } else if (piezaEntrada.getRotaciones() == 3 && altoDisponible >= 2) {
+                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1
+                            || copiaFila[posicionEntrada + 2] == 1) {
                         contador++;
                         copiaFila = tableroActual.get(contador);
                     }
-                }
-                else {
+                } else {
                     return 0; // Game Over
                 }
             }
@@ -305,53 +320,46 @@ class tablero {
                         contador++;
                         copiaFila = tableroActual.get(contador);
                     }
-                }
-                else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 2) {
-                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1 || copiaFila[posicionEntrada + 2] == 1) {
+                } else if (piezaEntrada.getRotaciones() == 1 && altoDisponible >= 2) {
+                    if (copiaFila[posicionEntrada] == 1 || copiaFila[posicionEntrada + 1] == 1
+                            || copiaFila[posicionEntrada + 2] == 1) {
                         contador++;
                         copiaFila = tableroActual.get(contador);
                     }
-                }
-                else if (piezaEntrada.getRotaciones() == 2 && altoDisponible >= 2) {
+                } else if (piezaEntrada.getRotaciones() == 2 && altoDisponible >= 2) {
                     if (contador > 0) {
                         int[] copiaFilaAux = tableroActual.get(contador - 1);
                         if (copiaFila[posicionEntrada] == 0 && copiaFilaAux[posicionEntrada] == 0) {
                             contador--;
                             copiaFila = tableroActual.get(contador);
-                        }
-                        else {
+                        } else {
                             if (copiaFila[posicionEntrada] == 1) {
                                 if (altoDisponible >= 3) {
                                     contador++;
                                     copiaFila = tableroActual.get(contador);
-                                }
-                                else {
+                                } else {
                                     return 0; // Game Over
                                 }
                             }
                         }
-                    }
-                    else {
+                    } else {
                         if (copiaFila[posicionEntrada] == 1) {
                             if (altoDisponible >= 3) {
                                 contador++;
                                 copiaFila = tableroActual.get(contador);
-                            }
-                            else {
+                            } else {
                                 return 0; // Game Over
                             }
                         }
                     }
-                }
-                else if (piezaEntrada.getRotaciones() == 3 && altoDisponible >= 1) {
+                } else if (piezaEntrada.getRotaciones() == 3 && altoDisponible >= 1) {
                     if (copiaFila[posicionEntrada + 2] == 1) {
                         if (altoDisponible >= 2) {
                             contador++;
                             copiaFila = tableroActual.get(contador);
                         }
                     }
-                }
-                else {
+                } else {
                     return 0; // Game Over
                 }
             }
@@ -364,8 +372,7 @@ class tablero {
                 coordenadaBloque = piezaEntrada.getPosicion(i);
                 if (coordenadaBloque[0] == alturaActual) {
                     copiaFila[posicionEntrada + coordenadaBloque[1]] = 1;
-                }
-                else if (coordenadaBloque[0] != alturaActual) {
+                } else if (coordenadaBloque[0] != alturaActual) {
                     alturaActual++;
                     tableroActual.set(contador, copiaFila);
                     contador++;
@@ -379,6 +386,7 @@ class tablero {
         }
     }
 
+    // boardtostring
     public void imprimirTablero() {
         int i, j;
         String stringTablero = "\n\t";
@@ -405,8 +413,7 @@ class tablero {
             for (j = 0; j < ancho; j++) {
                 if (auxiliar[j] == 0) {
                     stringTablero += "   ";
-                }
-                else if (auxiliar[j] == 1) {
+                } else if (auxiliar[j] == 1) {
                     stringTablero += " # ";
                 }
                 stringTablero += "║";
@@ -417,11 +424,10 @@ class tablero {
                     stringTablero += "═══╬";
                 }
                 stringTablero += "═══╣\n\t";
-            }
-            else {
+            } else {
                 stringTablero += "\n\t";
             }
-            
+
         }
 
         // Tapa inferior del tablero.
