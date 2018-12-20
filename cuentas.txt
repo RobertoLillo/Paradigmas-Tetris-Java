@@ -1,0 +1,6 @@
+N.Jugador		Password
+Robert			risler
+Javier			perez
+Diego			asd
+Rusio			traslape
+Robaks			asd

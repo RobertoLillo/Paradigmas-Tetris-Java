@@ -1,0 +1,6 @@
+N.Jugador		P.Jugadas	L.Elimin	P.Altos
+Robert          0			0			0,0,0
+Javier			0			0			0,0,0
+Diego			0			0			0,0,0
+Rusio			0			0			0,0,0
+Robaks			0			0			0,0,0
