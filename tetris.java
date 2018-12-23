@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.Random;
-import java.util.ArrayList;
 
 class Tetris {
     public static void main(String args[]) {
