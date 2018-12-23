@@ -5,16 +5,15 @@ public class Tablero {
     // Atributos estaticos:
 
     // Atributos instanciables:
-    private int ancho, alto, cantidadDePiezas, puntaje;
+    private int ancho, alto, lineasEliminadas, puntaje;
     private ArrayList<int[]> tableroActual = new ArrayList<int[]>();
-    private ArrayList<Pieza> listaPiezas = new ArrayList<Pieza>();
 
     // Constructor:
     public Tablero(int anchoEntrada, int altoEntrada) {
         // Asignacion de los atributos instanciables y creacion del tablero vacio.
         ancho = anchoEntrada;
         alto = altoEntrada;
-        cantidadDePiezas = 0;
+        lineasEliminadas = 0;
         puntaje = 0;
 
         int i, j;
@@ -36,9 +35,9 @@ public class Tablero {
     public int getAlto() {
         return alto;
     }
-
-    public int getCantidadDePiezas() {
-        return cantidadDePiezas;
+    
+    public int getLineasEliminadas() {
+        return lineasEliminadas;
     }
 
     public int getPuntaje() {
@@ -61,6 +60,7 @@ public class Tablero {
             if (flag) {
                 tableroActual.remove(i);
                 puntaje += 100;
+                lineasEliminadas++;
                 nuevaFila = new int[ancho];
                 for (j = 0; j < ancho; j++) {
                     nuevaFila[j] = 0;
@@ -108,6 +108,8 @@ public class Tablero {
         }
     }
 
+    // return 0 -> Game Over
+    // return 1 -> Se coloco la pieza
     public int play(Pieza piezaEntrada, int posicionEntrada) {
         int i, anchoPieza, altoDisponible, contador;
         int[] copiaFila;
@@ -380,8 +382,6 @@ public class Tablero {
                     copiaFila[posicionEntrada + coordenadaBloque[1]] = 1;
                 }
             }
-            listaPiezas.add(piezaEntrada);
-            cantidadDePiezas++;
             return 1; // Se logró colocar la pieza correctamente.
         }
     }

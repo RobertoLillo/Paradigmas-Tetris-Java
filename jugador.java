@@ -13,6 +13,33 @@ public class Jugador {
     }
 
     // *** Setters ***
+    public void setPartidasJugadas() {
+        partidasJugadas++;
+    }
+
+    public void setLineasEliminadas(int lineasEliminadas) {
+        this.lineasEliminadas += lineasEliminadas;
+    }
+
+    public void setPuntajesAltos(int puntaje) {
+        if (puntaje > puntajesAltos[0]) {
+            int auxiliar1, auxiliar2;
+            auxiliar1 = puntajesAltos[0];
+            puntajesAltos[0] = puntaje;
+            auxiliar2 = puntajesAltos[1];
+            puntajesAltos[1] = auxiliar1;
+            puntajesAltos[2] = auxiliar2;
+
+        } else if (puntaje > puntajesAltos[1]) {
+            int auxiliar1;
+            auxiliar1 = puntajesAltos[1];
+            puntajesAltos[1] = puntaje;
+            puntajesAltos[2] = auxiliar1;
+
+        } else if (puntaje > puntajesAltos[2]) {
+            puntajesAltos[2] = puntaje;
+        }
+    }
 
     // *** Getters ***
     public String getNombre() {
@@ -144,8 +171,6 @@ public class Jugador {
             }
 
         } while (flag);
-
-        scanner.close();
     } 
 
     // buscarUsuario
@@ -270,13 +295,15 @@ public class Jugador {
             linea = lecturaBRDatos.readLine();
             while (linea != null) {
                 lineaSplit = linea.split("\t\t\t");
-                if (lineaSplit[0].equals(this.nombre)) {
-                    auxiliar += this.nombre + "\t\t\t";
+                if (lineaSplit[0].equals(nombre)) {
+                    auxiliar += nombre + "\t\t\t";
                     auxiliar += Integer.toString(this.partidasJugadas) + "\t\t\t";
                     auxiliar += Integer.toString(this.lineasEliminadas) + "\t\t\t";
                     auxiliar += Integer.toString(this.puntajesAltos[0]) + ",";
                     auxiliar += Integer.toString(this.puntajesAltos[1]) + ",";
-                    auxiliar += Integer.toString(this.puntajesAltos[2]);
+                    auxiliar += Integer.toString(this.puntajesAltos[2]) + "\n";
+
+                    linea = lecturaBRDatos.readLine();
                     flag = false;
 
                 } else {
