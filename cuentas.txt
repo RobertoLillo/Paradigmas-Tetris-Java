@@ -1,6 +1,2 @@
 N.Jugador		Password
 Robert			risler
-Javier			asd
-qwert			y
-p3ròº			asd4ºª
-Nico			qwe

@@ -66,27 +66,59 @@ class Tetris {
         // ####################################################################################
         // ********************************* Seccion de juego *********************************
         // ####################################################################################
+
         if (opcion == 1) {
+
             // *******************************************************
             // ******* Seccion correspondiente a createBoard() *******
             // *******************************************************
             int ancho, alto, cantPiezas, semilla;
 
-            System.out.print("\nIngrese el ancho del tablero: ");
-            ancho = scanner.nextInt();
-            scanner.nextLine();
+            ancho = 0;
+            alto = 0;
+            cantPiezas = 0;
+            semilla = 0;
+            boolean pedirDatos = true;
+            while (pedirDatos) {
+                System.out.print("\nIngrese el ancho del tablero: ");
+                while (!scanner.hasNextInt()) {
+                    System.out.print("\nIngrese un valor numerico para el ancho del tablero: ");
+                    scanner.nextLine();
+                }
+                ancho = scanner.nextInt();
+                scanner.nextLine();
+    
+                System.out.print("Ingrese el alto del tablero: ");
+                while (!scanner.hasNextInt()) {
+                    System.out.print("\nIngrese un valor numerico para el alto del tablero: ");
+                    scanner.nextLine();
+                }
+                alto = scanner.nextInt();
+                scanner.nextLine();
+    
+                System.out.print("Ingrese la cantidad de piezas: ");
+                while (!scanner.hasNextInt()) {
+                    System.out.print("\nIngrese un valor numerico para la cantidad de piezas: ");
+                    scanner.nextLine();
+                }
+                cantPiezas = scanner.nextInt();
+                scanner.nextLine();
+    
+                System.out.print("Ingrese la semilla: ");
+                while (!scanner.hasNextInt()) {
+                    System.out.print("\nIngrese un valor numerico para la semilla: ");
+                    scanner.nextLine();
+                }
+                semilla = scanner.nextInt();
+                scanner.nextLine();
 
-            System.out.print("Ingrese el alto del tablero: ");
-            alto = scanner.nextInt();
-            scanner.nextLine();
+                if (ancho >= 5 && alto >= 10 && cantPiezas >= 0 && semilla >= 0) {
+                    pedirDatos = false;
 
-            System.out.print("Ingrese la cantidad de piezas: ");
-            cantPiezas = scanner.nextInt();
-            scanner.nextLine();
-
-            System.out.print("Ingrese la semilla: ");
-            semilla = scanner.nextInt();
-            scanner.nextLine();
+                } else {
+                    System.out.println("\nLos datos ingresados son erroneos");
+                }
+            }
 
             Tablero tableroActual = new Tablero(ancho, alto);
             tableroActual.colocarPiezasIniciales(cantPiezas, semilla);
@@ -112,6 +144,7 @@ class Tetris {
                     System.out.println("\nSiguiente pieza a colocar\n");
                     sigPieza.imprimirPieza();
                     tableroActual.imprimirTablero();
+                    System.out.printf("Puntaje: %d\n", tableroActual.getPuntaje());
 
                     System.out.println("\nIngrese una opcion:");
                     System.out.println(" 1) Colocar pieza");

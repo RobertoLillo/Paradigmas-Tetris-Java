@@ -46,8 +46,10 @@ public class Tablero {
 
     // Metodos:
     public void checkBoard() {
-        int i, j;
+        int i, j, contador;
         int[] copiaFila, nuevaFila;
+
+        contador = 0;
         boolean flag;
         for (i = 0; i < alto; i++) {
             copiaFila = tableroActual.get(i);
@@ -59,7 +61,7 @@ public class Tablero {
             }
             if (flag) {
                 tableroActual.remove(i);
-                puntaje += 100;
+                contador++;
                 lineasEliminadas++;
                 nuevaFila = new int[ancho];
                 for (j = 0; j < ancho; j++) {
@@ -68,6 +70,18 @@ public class Tablero {
                 tableroActual.add(nuevaFila);
                 i--;
             }
+        }
+        if (contador == 1) {
+            puntaje += 150;
+
+        } else if (contador == 2) {
+            puntaje += 300;
+
+        } else if (contador == 3) {
+            puntaje += 600;
+
+        } else if (contador == 4) {
+            puntaje += 1200;
         }
     }
 
@@ -278,7 +292,7 @@ public class Tablero {
                             return 0; // Game Over
                         }
                     }
-                } else if (piezaEntrada.getRotaciones() == 2 && altoDisponible >= 2) {
+                } else if (piezaEntrada.getRotaciones() == 2 && altoDisponible >= 1) {
                     if (contador > 0) {
                         int[] copiaFilaAux = tableroActual.get(contador - 1);
                         if (copiaFila[posicionEntrada + 1] == 0 && copiaFilaAux[posicionEntrada + 1] == 0) {
@@ -328,7 +342,7 @@ public class Tablero {
                         contador++;
                         copiaFila = tableroActual.get(contador);
                     }
-                } else if (piezaEntrada.getRotaciones() == 2 && altoDisponible >= 2) {
+                } else if (piezaEntrada.getRotaciones() == 2 && altoDisponible >= 1) {
                     if (contador > 0) {
                         int[] copiaFilaAux = tableroActual.get(contador - 1);
                         if (copiaFila[posicionEntrada] == 0 && copiaFilaAux[posicionEntrada] == 0) {
