@@ -1,10 +1,8 @@
 import java.util.Random;
 import java.util.ArrayList;
 
-class Tablero {
-    // Atributos estaticos:
-
-    // Atributos instanciables:
+public class Tablero {
+    // Atributos instanciables
     private int ancho, alto, lineasEliminadas, puntaje;
     private ArrayList<int[]> tableroActual = new ArrayList<int[]>();
 
@@ -413,11 +411,11 @@ class Tablero {
         stringTablero += "\n\t";
 
         // Tapa superior del tablero.
-        stringTablero += "â•”â•?";
+        stringTablero += "â•”ï¿½?";
         for (i = 0; i < ancho - 1; i++) {
-            stringTablero += "â•?â•?â•¦â•?";
+            stringTablero += "ï¿½?ï¿½?â•¦ï¿½?";
         }
-        stringTablero += "â•?â•?â•—";
+        stringTablero += "ï¿½?ï¿½?â•—";
 
         // Parte interior del tablero.
         stringTablero += "\n\t";
@@ -435,9 +433,9 @@ class Tablero {
             if (i > 0) {
                 stringTablero += "\n\tâ• ";
                 for (j = 0; j < ancho - 1; j++) {
-                    stringTablero += "â•?â•?â•?â•¬";
+                    stringTablero += "ï¿½?ï¿½?ï¿½?â•¬";
                 }
-                stringTablero += "â•?â•?â•?â•£\n\t";
+                stringTablero += "ï¿½?ï¿½?ï¿½?â•£\n\t";
             } else {
                 stringTablero += "\n\t";
             }
@@ -445,11 +443,11 @@ class Tablero {
         }
 
         // Tapa inferior del tablero.
-        stringTablero += "â•šâ•?";
+        stringTablero += "â•šï¿½?";
         for (i = 0; i < ancho - 1; i++) {
-            stringTablero += "â•?â•?â•©â•?";
+            stringTablero += "ï¿½?ï¿½?â•©ï¿½?";
         }
-        stringTablero += "â•?â•?â•?";
+        stringTablero += "ï¿½?ï¿½?ï¿½?";
         stringTablero += "\n";
         System.out.println(stringTablero);
     }
