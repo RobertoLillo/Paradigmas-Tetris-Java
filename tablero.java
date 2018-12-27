@@ -401,54 +401,36 @@ public class Tablero {
     // boardtostring
     public void imprimirTablero() {
         int i, j;
-        String stringTablero = "\n\t";
+        String stringTablero = "\t";
         int[] auxiliar = new int[ancho];
 
-        // Numeros para las columnas
-        for (i = 1; i <= ancho; i++) {
-            stringTablero += "  " + Integer.toString(i) + " ";
-        }
-        stringTablero += "\n\t";
-
         // Tapa superior del tablero.
-        stringTablero += "╔�?";
-        for (i = 0; i < ancho - 1; i++) {
-            stringTablero += "�?�?╦�?";
+        for (i = 0; i < (ancho * 2) + 1; i++) {
+            stringTablero += "_";
         }
-        stringTablero += "�?�?╗";
 
         // Parte interior del tablero.
         stringTablero += "\n\t";
         for (i = alto - 1; i >= 0; i--) {
-            stringTablero += "║";
+            stringTablero += "|";
             auxiliar = tableroActual.get(i);
             for (j = 0; j < ancho; j++) {
                 if (auxiliar[j] == 0) {
-                    stringTablero += "   ";
+                    stringTablero += " ";
                 } else if (auxiliar[j] == 1) {
-                    stringTablero += " # ";
+                    stringTablero += "#";
                 }
-                stringTablero += "║";
+                stringTablero += "|";
             }
-            if (i > 0) {
-                stringTablero += "\n\t╠";
-                for (j = 0; j < ancho - 1; j++) {
-                    stringTablero += "�?�?�?╬";
-                }
-                stringTablero += "�?�?�?╣\n\t";
-            } else {
-                stringTablero += "\n\t";
-            }
-
+            stringTablero += "\n\t";
         }
 
-        // Tapa inferior del tablero.
-        stringTablero += "╚�?";
-        for (i = 0; i < ancho - 1; i++) {
-            stringTablero += "�?�?╩�?";
+        // Numeros para las columnas
+        for (i = 1; i <= ancho; i++) {
+            stringTablero += "|" + Integer.toString(i);
         }
-        stringTablero += "�?�?�?";
-        stringTablero += "\n";
+        stringTablero += "|\n\t";
+
         System.out.println(stringTablero);
     }
 }
