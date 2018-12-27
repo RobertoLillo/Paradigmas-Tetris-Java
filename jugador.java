@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 
-public class Jugador {
+class Jugador {
     // *** Atributos ***
     private String nombre;
     private int partidasJugadas, lineasEliminadas;

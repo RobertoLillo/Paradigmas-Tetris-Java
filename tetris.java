@@ -4,9 +4,9 @@ import java.util.Random;
 class Tetris {
     public static void main(String args[]) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\n\t\t╔═════════════════════╗");
-        System.out.println("\t\t║ Bienvenido a Tetris ║");
-        System.out.println("\t\t╚═════════════════════╝");
+        System.out.println("\n\t\t ───────────────────── ");
+        System.out.println("\t\t│ Bienvenido a Tetris │");
+        System.out.println("\t\t ───────────────────── ");
 
         // ####################################################################################
         // ********************** Seccion de inicio o creacion de cuenta **********************

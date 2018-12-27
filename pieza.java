@@ -1,4 +1,4 @@
-public class Pieza {
+class Pieza {
     // *** Atributos ***
 
     // Variables piezaXY, donde X = IDPieza e Y = Rotaciones.

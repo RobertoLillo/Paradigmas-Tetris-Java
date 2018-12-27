@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.ArrayList;
 
-public class Tablero {
+class Tablero {
     // Atributos estaticos:
 
     // Atributos instanciables:
@@ -413,11 +413,11 @@ public class Tablero {
         stringTablero += "\n\t";
 
         // Tapa superior del tablero.
-        stringTablero += "‚ïî‚ïê";
+        stringTablero += "‚ïî‚ï?";
         for (i = 0; i < ancho - 1; i++) {
-            stringTablero += "‚ïê‚ïê‚ï¶‚ïê";
+            stringTablero += "‚ï?‚ï?‚ï¶‚ï?";
         }
-        stringTablero += "‚ïê‚ïê‚ïó";
+        stringTablero += "‚ï?‚ï?‚ïó";
 
         // Parte interior del tablero.
         stringTablero += "\n\t";
@@ -435,9 +435,9 @@ public class Tablero {
             if (i > 0) {
                 stringTablero += "\n\t‚ï†";
                 for (j = 0; j < ancho - 1; j++) {
-                    stringTablero += "‚ïê‚ïê‚ïê‚ï¨";
+                    stringTablero += "‚ï?‚ï?‚ï?‚ï¨";
                 }
-                stringTablero += "‚ïê‚ïê‚ïê‚ï£\n\t";
+                stringTablero += "‚ï?‚ï?‚ï?‚ï£\n\t";
             } else {
                 stringTablero += "\n\t";
             }
@@ -445,11 +445,11 @@ public class Tablero {
         }
 
         // Tapa inferior del tablero.
-        stringTablero += "‚ïö‚ïê";
+        stringTablero += "‚ïö‚ï?";
         for (i = 0; i < ancho - 1; i++) {
-            stringTablero += "‚ïê‚ïê‚ï©‚ïê";
+            stringTablero += "‚ï?‚ï?‚ï©‚ï?";
         }
-        stringTablero += "‚ïê‚ïê‚ïù";
+        stringTablero += "‚ï?‚ï?‚ï?";
         stringTablero += "\n";
         System.out.println(stringTablero);
     }
