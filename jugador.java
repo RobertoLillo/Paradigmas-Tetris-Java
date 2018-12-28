@@ -1,18 +1,28 @@
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Clase Jugador Clase en la que se encuentran todos los datos y manejos
+ * respectivos al jugador y al manejo de archivos de este
+ * 
+ * @author: Roberto Lillo Toloza
+ * @version: 27/12/2018
+ */
 public class Jugador {
-    // *** Atributos ***
+    // Atributos
     private String nombre;
     private int partidasJugadas, lineasEliminadas;
     private int[] puntajesAltos = new int[3];
 
-    // *** Constructor ***
+    /**
+     * Constructor de la clase jugador, mantiene un nombre que solo es asignable
+     * hasta que se inicia sesion.
+     */
     public Jugador() {
         this.nombre = "placeholder";
     }
 
-    // *** Setters ***
+    // Setters
     public void setPartidasJugadas() {
         partidasJugadas++;
     }
@@ -41,7 +51,7 @@ public class Jugador {
         }
     }
 
-    // *** Getters ***
+    // Getters
     public String getNombre() {
         return this.nombre;
     }
@@ -58,7 +68,58 @@ public class Jugador {
         return this.puntajesAltos;
     }
 
-    // *** Metodos ***
+    // Metodos
+    /**
+     * Se utiliza cuando no se encuentra el archivo con cuentas junto al programa.
+     */
+    private void crearArchivoCuentas() {
+        File archivoCuentas = new File("cuentas.txt");
+
+        try {
+            archivoCuentas.createNewFile();
+            FileWriter escrituraFWCuentas = new FileWriter(archivoCuentas);
+            PrintWriter escrituraPWCuentas = new PrintWriter(escrituraFWCuentas);
+
+            escrituraPWCuentas.println("N.Jugador\t\tPassword");
+            System.out.println("\nSe creo el archivo cuentas.txt");
+
+            escrituraPWCuentas.close();
+            escrituraFWCuentas.close();
+
+        } catch (Exception e) {
+            System.out.printf("Problema crearArchivoCuentas: %s", e);
+        }
+    }
+
+    /**
+     * Se utiliza cuando no se encuentra el archivo con datos junto al programa.
+     */
+    private void crearArchivoDatos() {
+        File archivoDatos = new File("datos.txt");
+
+        try {
+            archivoDatos.createNewFile();
+            FileWriter escrituraFWDatos = new FileWriter(archivoDatos);
+            PrintWriter escrituraPWDatos = new PrintWriter(escrituraFWDatos);
+
+            escrituraPWDatos.println("N.Jugador\t\tP.Jugadas\tL.Elimin\tP.Altos");
+            System.out.println("\nSe creo el archivo datos.txt");
+
+            escrituraPWDatos.close();
+            escrituraFWDatos.close();
+
+        } catch (Exception e) {
+            System.out.printf("Problema en crearArchivoDatos: %s", e);
+        }
+    }
+
+    /**
+     * Inicia la creacion de un usuario, el cual luego se guarda en el archivo
+     * "cuentas.txt".
+     * 
+     * @param scanner scanner para datos de entrada que se utiliza en todo el
+     *                programa
+     */
     public void crearUsuario(Scanner scanner) {
         int verificador;
         boolean flag;
@@ -85,10 +146,15 @@ public class Jugador {
         } while (flag);
     }
 
-    // agregarCuenta
-    // Agrega una cuenta de usuario al archivo de cuentas si es que el nombre no se encuentra ya registrado
-    // return 0 -> El nombre de usuario ya existe
-    // return 1 -> Se crea la cuenta
+    /**
+     * Escribe la cuenta nueva dentro del archivo "cuentas.txt". Previamente
+     * verifica que el nombre de usuario no exista anteriormente.
+     * 
+     * @param nombre   Nombre del usuario
+     * @param password Password del usuario
+     * @return 0 si es que el nombre de usuario ya existe, 1 Si es que se crea la
+     *         cuenta,
+     */
     public int agregarCuenta(String nombre, String password) {
         File archivoCuentas = new File("cuentas.txt");
 
@@ -100,7 +166,7 @@ public class Jugador {
             FileReader lecturaFRCuentas = new FileReader(archivoCuentas);
             BufferedReader lecturaBRCuentas = new BufferedReader(lecturaFRCuentas);
             FileWriter escrituraFWCuentas = new FileWriter(archivoCuentas, true);
-            PrintWriter escrituraPWCuentas = new PrintWriter(escrituraFWCuentas);        
+            PrintWriter escrituraPWCuentas = new PrintWriter(escrituraFWCuentas);
 
             int verificador;
             String linea;
@@ -134,7 +200,7 @@ public class Jugador {
                     System.out.println("\nEl nombre de usuario debe tener entre 4 a 7 caracteres");
                     verificador = 0;
                 }
-                
+
             }
 
             escrituraPWCuentas.close();
@@ -149,6 +215,12 @@ public class Jugador {
         }
     }
 
+    /**
+     * Solicita datos de entrada para intentar iniciar sesion.
+     * 
+     * @param scanner scanner para datos de entrada que se utiliza en todo el
+     *                programa
+     */
     public void iniciarSesion(Scanner scanner) {
         int verificador;
         boolean flag;
@@ -171,13 +243,17 @@ public class Jugador {
             }
 
         } while (flag);
-    } 
+    }
 
-    // buscarUsuario
-    // Busca un usuario en el archivo de cuentas
-    // return 0 -> el usuario no existe
-    // return 1 -> la password es incorrecta
-    // return 2 -> la combinacion es correcta
+    /**
+     * Verifica que un usuario existe, tanto el usuario solo como la combinacion
+     * usuario-password
+     * 
+     * @param nombre Nombre del usuario
+     * @param pass   Password del usuario
+     * @return 0 si el usuario no existe, 1 si la password es incorrecta, 2 si la
+     *         combinacion es correcta
+     */
     public int buscarUsuario(String nombre, String pass) {
         File archivoCuentas = new File("cuentas.txt");
 
@@ -230,8 +306,10 @@ public class Jugador {
         }
     }
 
-    // recuperarDatosCuenta
-    // Lee el archivo de datos y los recupera para ser usados en la ejecucion
+    /**
+     * Lee el archivo "datos.txt" y recupera todos los datos como cantidad de
+     * partidas, total de lineas eliminadas y mejores 3 puntajes.
+     */
     public void recuperarDatosCuenta() {
         File archivoDatos = new File("datos.txt");
 
@@ -275,6 +353,11 @@ public class Jugador {
         }
     }
 
+    /**
+     * Escribe los datos que sean necesarios en el archivo "datos.txt".
+     * 
+     * @param nombre Nombre del usuario
+     */
     public void guardarDatosCuenta(String nombre) {
         File archivoDatos = new File("datos.txt");
 
@@ -325,7 +408,7 @@ public class Jugador {
             PrintWriter escrituraPWDatos = new PrintWriter(escrituraFWDatos);
 
             escrituraPWDatos.print(auxiliar);
-            
+
             escrituraPWDatos.close();
             escrituraFWDatos.close();
             lecturaBRDatos.close();
@@ -335,46 +418,4 @@ public class Jugador {
             System.out.printf("\nProblema en guardarDatosCuenta: %s", e);
         }
     }
-
-    // crearArchivoCuentas
-    // Crea el archivo en el que se guardan las cuentas de jugador
-    private void crearArchivoCuentas() {
-        File archivoCuentas = new File("cuentas.txt");
-
-        try {
-            archivoCuentas.createNewFile();
-            FileWriter escrituraFWCuentas = new FileWriter(archivoCuentas);
-            PrintWriter escrituraPWCuentas = new PrintWriter(escrituraFWCuentas);
-            
-            escrituraPWCuentas.println("N.Jugador\t\tPassword");
-            System.out.println("\nSe creo el archivo cuentas.txt");
-
-            escrituraPWCuentas.close();
-            escrituraFWCuentas.close();
-
-        } catch (Exception e) {
-            System.out.printf("Problema crearArchivoCuentas: %s", e);
-        }
-    }
-
-    // crearArchivoDatos
-    // Crea el archivo en el que se guardan los datos de cada cuenta
-    public void crearArchivoDatos() {
-        File archivoDatos = new File("datos.txt");
-
-        try {
-            archivoDatos.createNewFile();
-            FileWriter escrituraFWDatos = new FileWriter(archivoDatos);
-            PrintWriter escrituraPWDatos = new PrintWriter(escrituraFWDatos);
-            
-            escrituraPWDatos.println("N.Jugador\t\tP.Jugadas\tL.Elimin\tP.Altos");
-            System.out.println("\nSe creo el archivo datos.txt");
-
-            escrituraPWDatos.close();
-            escrituraFWDatos.close();
-
-        } catch (Exception e) {
-            System.out.printf("Problema en crearArchivoDatos: %s", e);
-        }
-    } 
 }

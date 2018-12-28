@@ -1,6 +1,13 @@
 import java.util.Scanner;
 import java.util.Random;
 
+/**
+ * Clase Tetris Clase general en donde se encuentra el main y la ejecucion
+ * principal del juego.
+ * 
+ * @author: Roberto Lillo Toloza
+ * @version: 27/12/2018
+ */
 class Tetris {
     public static void main(String args[]) {
         Scanner scanner = new Scanner(System.in);
@@ -9,7 +16,7 @@ class Tetris {
         System.out.println("\t\t --------------------- ");
 
         // ####################################################################################
-        // ********************** Seccion de inicio o creacion de cuenta **********************
+        // ###################### Seccion de inicio o creacion de cuenta ######################
         // ####################################################################################
         int opcion;
         boolean inicioSesion;
@@ -60,18 +67,16 @@ class Tetris {
                 System.out.println("\nLa opcion esta fuera de rango");
             }
         }
-        // ####################################################################################
-        // ####################################################################################
 
         // ####################################################################################
-        // ********************************* Seccion de juego *********************************
+        // ################################# Seccion de juego #################################
         // ####################################################################################
 
         if (opcion == 1) {
 
-            // *******************************************************
-            // ******* Seccion correspondiente a createBoard() *******
-            // *******************************************************
+            // #######################################################
+            // ####### Seccion correspondiente a createBoard() #######
+            // #######################################################
             int ancho, alto, cantPiezas, semilla;
 
             ancho = 0;
@@ -87,7 +92,7 @@ class Tetris {
                 }
                 ancho = scanner.nextInt();
                 scanner.nextLine();
-    
+
                 System.out.print("Ingrese el alto del tablero: ");
                 while (!scanner.hasNextInt()) {
                     System.out.print("\nIngrese un valor numerico para el alto del tablero: ");
@@ -95,7 +100,7 @@ class Tetris {
                 }
                 alto = scanner.nextInt();
                 scanner.nextLine();
-    
+
                 System.out.print("Ingrese la cantidad de piezas: ");
                 while (!scanner.hasNextInt()) {
                     System.out.print("\nIngrese un valor numerico para la cantidad de piezas: ");
@@ -103,7 +108,7 @@ class Tetris {
                 }
                 cantPiezas = scanner.nextInt();
                 scanner.nextLine();
-    
+
                 System.out.print("Ingrese la semilla: ");
                 while (!scanner.hasNextInt()) {
                     System.out.print("\nIngrese un valor numerico para la semilla: ");
@@ -194,8 +199,6 @@ class Tetris {
                                     scanner.nextLine();
                                 }
                             }
-                            // ***************************************************************
-                            // ***************************************************************
 
                         } else if (sigOpcion == 2) {
                             sigPieza.rotarPieza();

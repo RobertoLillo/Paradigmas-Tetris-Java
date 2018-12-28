@@ -1,3 +1,4 @@
 N.Jugador		Password
 Robert			risler
 Javier			asd
+Cesar			valz

@@ -1,14 +1,27 @@
 import java.util.Random;
 import java.util.ArrayList;
 
+/**
+ * Clase Tablero Clase en la que se encuentran todos los datos y manejos
+ * respectivos al tablero.
+ * 
+ * @author: Roberto Lillo Toloza
+ * @version: 27/12/2018
+ */
 public class Tablero {
-    // Atributos instanciables
+    // Atributos de la clase
     private int ancho, alto, lineasEliminadas, puntaje;
     private ArrayList<int[]> tableroActual = new ArrayList<int[]>();
 
-    // Constructor:
+    /**
+     * Constructor del tablero de juego, se instancia estando vacio
+     * 
+     * @param anchoEntrada Numero que anteriormente se verifica sea mayor o igual a
+     *                     5
+     * @param altoEntrada  Numero que anteriormente se verifica sea mayor o igual a
+     *                     10
+     */
     public Tablero(int anchoEntrada, int altoEntrada) {
-        // Asignacion de los atributos instanciables y creacion del tablero vacio.
         ancho = anchoEntrada;
         alto = altoEntrada;
         lineasEliminadas = 0;
@@ -23,7 +36,7 @@ public class Tablero {
             }
             tableroActual.add(fila);
         }
-    }
+    } // Cierre del constructor
 
     // Getters:
     public int getAncho() {
@@ -33,7 +46,7 @@ public class Tablero {
     public int getAlto() {
         return alto;
     }
-    
+
     public int getLineasEliminadas() {
         return lineasEliminadas;
     }
@@ -43,6 +56,12 @@ public class Tablero {
     }
 
     // Metodos:
+    /**
+     * Verifica la existencia de lineas completas dentro del tablero, si llega a
+     * encontrarse una la elimina y agrega una linea vacia al final de este. Tambien
+     * dependiendo de la cantidad de lineas que elimina aumenta el puntaje del
+     * juego.
+     */
     public void checkBoard() {
         int i, j, contador;
         int[] copiaFila, nuevaFila;
@@ -83,6 +102,13 @@ public class Tablero {
         }
     }
 
+    /**
+     * Genera una serie de piezas a partir del parametro cantidad y la semilla, y
+     * las coloca dentro del tablero vacio que se construye al inicio del juego.
+     * 
+     * @param cantidad    Cantidad de piezas a colocar
+     * @param seedEntrada Semilla para los numeros aleatorios
+     */
     public void colocarPiezasIniciales(int cantidad, int seedEntrada) {
         int idPieza, cantGiros, posicion, verificador;
         boolean flag;
@@ -120,8 +146,15 @@ public class Tablero {
         }
     }
 
-    // return 0 -> Game Over
-    // return 1 -> Se coloco la pieza
+    /**
+     * Coloca una pieza dentro del tablero, a partir de una posicion que se le
+     * indique.
+     * 
+     * @param piezaEntrada    Pieza a colocar
+     * @param posicionEntrada Posicion dentro del rango posible
+     * @return 0 si se llega a una situacion en la que se pierde el juego, 1 si se
+     *         logra colocar la pieza,
+     */
     public int play(Pieza piezaEntrada, int posicionEntrada) {
         int i, anchoPieza, altoDisponible, contador;
         int[] copiaFila;
@@ -398,7 +431,10 @@ public class Tablero {
         }
     }
 
-    // boardtostring
+    /**
+     * Muestra por pantalla en tablero actual Corresponde al requerimiento funcional
+     * boardToString.
+     */
     public void imprimirTablero() {
         int i, j;
         String stringTablero = "\t";
