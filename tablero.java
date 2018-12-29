@@ -62,7 +62,7 @@ public class Tablero {
      * dependiendo de la cantidad de lineas que elimina aumenta el puntaje del
      * juego.
      */
-    public void checkBoard() {
+    public void checkBoard() {  // requerimiento funcional checkBoard
         int i, j, contador;
         int[] copiaFila, nuevaFila;
 
@@ -155,7 +155,7 @@ public class Tablero {
      * @return 0 si se llega a una situacion en la que se pierde el juego, 1 si se
      *         logra colocar la pieza,
      */
-    public int play(Pieza piezaEntrada, int posicionEntrada) {
+    public int play(Pieza piezaEntrada, int posicionEntrada) {  // requerimiento funcional play
         int i, anchoPieza, altoDisponible, contador;
         int[] copiaFila;
         boolean flag1, flag2;
@@ -435,7 +435,7 @@ public class Tablero {
      * Muestra por pantalla en tablero actual Corresponde al requerimiento funcional
      * boardToString.
      */
-    public void imprimirTablero() {
+    public void imprimirTablero() { // requerimiento funcional imprimirTablero
         int i, j;
         String stringTablero = "\t";
         int[] auxiliar = new int[ancho];

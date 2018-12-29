@@ -120,7 +120,7 @@ public class Jugador {
      * @param scanner scanner para datos de entrada que se utiliza en todo el
      *                programa
      */
-    public void crearUsuario(Scanner scanner) {
+    public void crearUsuario(Scanner scanner) { // Requerimiento funcional extra register()
         int verificador;
         boolean flag;
         String nombre, password, passwordAux;
@@ -137,6 +137,8 @@ public class Jugador {
 
             if (password.equals(passwordAux)) {
                 verificador = agregarCuenta(nombre, password);
+            } else {
+                System.out.print("\nLas password ingresadas no coinciden\n");
             }
 
             if (verificador == 1) {
@@ -179,7 +181,7 @@ public class Jugador {
             while (linea != null && flag) {
                 lineaSplit = linea.split("\t\t\t");
                 if (lineaSplit[0].equals(nombre)) { // El nombre de usuario ya existe
-                    System.out.printf("\nEse nombre de usuario ya esta ocupado");
+                    System.out.printf("\nEse nombre de usuario ya esta ocupado\n");
                     verificador = 0;
                     flag = false;
 
@@ -221,7 +223,7 @@ public class Jugador {
      * @param scanner scanner para datos de entrada que se utiliza en todo el
      *                programa
      */
-    public void iniciarSesion(Scanner scanner) {
+    public void iniciarSesion(Scanner scanner) {    // Requerimiento funcional extra login()
         int verificador;
         boolean flag;
         String nombre, password;

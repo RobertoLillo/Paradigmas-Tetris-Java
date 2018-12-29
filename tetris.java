@@ -27,7 +27,7 @@ class Tetris {
         while (inicioSesion) {
             System.out.println("\nIngrese una opcion");
             System.out.println(" 1) Iniciar sesion");
-            System.out.println(" 2) Crear usuario");
+            System.out.println(" 2) Crear cuenta");
             System.out.println(" 3) Salir");
             System.out.print("\nOpcion -> ");
 
@@ -48,7 +48,7 @@ class Tetris {
 
                 } else if (opcion == 2) {
                     // Crear usuario
-                    System.out.println("\nCrear usuario");
+                    System.out.println("\nCrear cuenta");
                     jugadorActual.crearUsuario(scanner);
                 }
 
@@ -139,8 +139,10 @@ class Tetris {
 
             jugar = true;
             while (jugar) {
+
                 idPieza = 1 + random.nextInt(7); // Numero del 1 al 7
-                sigPieza = new Pieza(idPieza);
+                sigPieza = new Pieza(idPieza);  // requerimiento funcional nextPiece
+
                 // ***********************************************************************
                 // ******************** Bloque de seleccion principal ********************
                 // ***********************************************************************
@@ -227,7 +229,15 @@ class Tetris {
 
             jugadorActual.guardarDatosCuenta(jugador);
 
-            System.out.println("Game Over");
+            System.out.println("\n\t\t ----------- ");
+            System.out.println("\t\t| Game Over |");
+            System.out.println("\t\t ----------- ");
+
+            int[] puntajes = jugadorActual.getPuntajesAltos();
+            System.out.printf("\n\tJugador: %s\n", jugadorActual.getNombre());
+            System.out.printf("\tPartidas Jugadas: %d\n", jugadorActual.getPartidasJugadas());
+            System.out.printf("\tLineas totales eliminadas: %d\n", jugadorActual.getLineasEliminadas());
+            System.out.printf("\tMejores Puntajes: %d - %d - %d\n\n", puntajes[0], puntajes[1], puntajes[2]);
         }
         // ###################################################################################
         // ###################################################################################
