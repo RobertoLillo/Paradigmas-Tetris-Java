@@ -1,2 +1,2 @@
-# tetrisJava
-Lab 3 Paradigmas Java (2-2018)
+# Paradigmas-Tetris-Java
+Laboratorio 3 Paradigmas de Programación. Scheme. (2-2018).
